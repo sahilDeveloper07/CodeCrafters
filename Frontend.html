@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Tutorial Classes</title>
+    <style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Header Styles */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav {
+    margin: 20px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ddd;
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 40px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Heading Styles */
+h2 {
+    color: #4CAF50;
+    border-bottom: 2px solid #4CAF50;
+    padding-bottom: 10px;
+}
+
+/* Course List Styles */
+#course-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.course-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e0e0;
+}
+
+.course-item img {
+    max-width: 100%;
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.course-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+.course-item:hover img {
+    transform: scale(1.05);
+}
+
+.course-item h3 {
+    margin: 10px 0;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.course-item p {
+    margin: 10px 0;
+}
+
+/* About Us List Styles */
+#about-course-list {
+    list-style-type: square;
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media (max-width: 1000px) {
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    .course-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .course-item img {
+        margin-bottom: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Online Tutorial Classes</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#courses">Courses</a></li>
+
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Welcome to Our Online Tutorial Classes</h2>
+            <p>We provide a variety of online courses designed to help you learn new skills and advance your career. Our platform is user-friendly and accessible, allowing you to learn at your own pace from the comfort of your home.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Our team consists of experienced educators and industry professionals who are passionate about teaching and helping students succeed. We offer courses in various fields, including:</p>
+            <ul >
+                <li>Web Development</li>
+                <li>Canva</li>
+                <li>Scratch</li>
+                <li>Python</li>
+                <li>Communication Skills</li>
+            </ul>
+            <p>Each course is designed to provide practical knowledge and skills that you can apply in real-world scenarios.</p>
+        </section>
+
+        <section id="courses">
+            <h2>Available Courses</h2>
+            <div id="course-list">
+                <!-- Courses will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Online Tutorial Classes</p>
+    </footer>
+    <script>
+        function displayCourses() {
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = '';
+
+            // Retrieve courses from local storage
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+
+            courses.forEach(course => {
+                const courseItem = document.createElement('div');
+                courseItem.className = 'course-item';
+                courseItem.innerHTML = `
+                    <img src="${course.image}" alt="${course.title}">
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                `;
+                courseList.appendChild(courseItem);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', displayCourses);
+    </script>
+</body>
+</html>

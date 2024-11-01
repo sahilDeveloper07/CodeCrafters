@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Manage Courses</title>
+    <style>
+        /* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(to right, #4E0064, #D74AFF); /* Light gradient background */
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(to right,#D74AFF,#4E0064); /* Gradient for header */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 5px solid #2e7d32; /* Darker green border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; /* Center navigation items */
+}
+
+nav li {
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff; /* White text for links */
+    text-decoration: none; /* No underline */
+    font-weight: bold; /* Bold text for links */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+nav a:hover {
+    color: #ffd54f; /* Gold color on hover */
+}
+
+/* Main Content Styles */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center main content */
+    padding: 20px;
+}
+
+section {
+    background-color: #ffffff; /* White background for sections */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 800px; /* Max width for larger screens */
+    transition: transform 0.3s; /* Animation for hover effect */
+}
+
+section:hover {
+    transform: translateY(-15px); /* Lift effect on hover */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color:#671B7D; /* Green color for labels */
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    width: 100%;
+    transition: border-color 0.3s; /* Transition for border color */
+}
+
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+    border-color: #671B7D; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+}
+
+textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+/* Button Styles */
+button[type="submit"],
+button[type="button"] {
+    background-color: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effect */
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Course List Styles */
+.course-item {
+    background-color: #ffffff; /* White background for course items */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgb(205, 133, 225); /* Subtle shadow */
+    margin-bottom: 20px;
+    transition: transform 0.3s; /* Animation for hover effect */
+}
+
+.course-item:hover {
+    transform: translateX(-5px); /* Lift effect on hover */
+}
+
+.course-item h3 {
+    margin-top: 0;
+    color: #333; /* Dark color for course titles */
+}
+
+.course-item p {
+    margin-bottom: 20px;
+ }
+
+.course-item img {
+    max-width: 200px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgb(205, 133, 225); /* Subtle shadow */
+}
+
+/* Edit and Delete Button Styles */
+.course-item button[type="button"] {
+    background-color: #4CAF50; /* Green background */
+    color: #fff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.3s; /* Transition for hover effect */
+}
+
+.course-item button[type="button"]:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: #333; /* Dark background for footer */
+    color: #fff; /* White text for footer */
+    padding: 20px;
+    text-align: center;
+    border-top: 5px solid #2e7d32; /* Darker green border */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+footer a {
+    color: #fff; /* White text for links in footer */
+    text-decoration: none; /* No underline */
+    font-weight: bold; /* Bold text for links in footer */
+    transition: color 0.3s; /* Smooth color transition */
+}
+
+footer a:hover {
+    color: #ffd54f; /* Gold color on hover */
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+        <nav>
+            <ul>
+                <li><a href="Main.html">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="add-course">
+            <h2 id="form-title">Add New Course</h2>
+            <form id="course-form">
+                <label for="course-title">Course Title:</label>
+                <input type="text" id="course-title" required>
+                
+                <label for="course-description">Course Description:</label>
+                <textarea id="course-description" required></textarea>
+
+                <label for="course-image-url">Course Image URL:</label>
+                <input type="url" id="course-image-url" placeholder="Enter image URL" required>
+
+                <button type="submit">Add Course</button>
+                <button type="button" id="cancel-edit" style="display: none;">Cancel Edit</button>
+            </form>
+        </section>
+
+        <section id="manage-courses">
+            <h2>Manage Courses</h2>
+            <div id="course-list">
+                <!-- Existing courses will be displayed here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Online Tutorial Classes</p>
+    </footer>
+    <script>
+        let editIndex = -1; // To track which course is being edited
+
+        document.getElementById('course-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('course-title').value;
+            const description = document.getElementById('course-description').value;
+            const imageUrl = document.getElementById('course-image-url').value;
+
+            const newCourse = { title, description, image: imageUrl };
+
+            // Retrieve existing courses from local storage
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+
+            if (editIndex === -1) {
+                // Add new course
+                courses.push(newCourse);
+            } else {
+                // Update existing course
+                courses[editIndex] = newCourse;
+                editIndex = -1; // Reset edit index
+                document.getElementById('form-title').innerText = 'Add New Course';
+                document.getElementById('cancel-edit').style.display = 'none';
+            }
+            
+            // Save the updated courses array back to local storage
+            localStorage.setItem('courses', JSON.stringify(courses));
+
+            // Clear the form fields
+            document.getElementById('course-title').value = '';
+            document.getElementById('course-description').value = '';
+            document.getElementById('course-image-url').value = '';
+
+            // Refresh the course list
+            displayCourses();
+        });
+
+        // Function to display existing courses
+        function displayCourses() {
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = '';
+
+            // Retrieve existing courses from local storage
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+
+            courses.forEach((course, index) => {
+                const courseItem = document.createElement('div');
+                courseItem.className = 'course-item';
+                courseItem.innerHTML = `
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    ${course.image ? `<img src="${course.image}" alt="${course.title}" style="max-width: 200px; margin-top: 10px;">` : ''}
+                    <button onclick="editCourse(${index})">Edit Course</button>
+                    <button onclick="deleteCourse(${index})">Delete Course</button>
+                `;
+                courseList.appendChild(courseItem);
+            });
+        }
+
+        // Function to delete a course
+        function deleteCourse(index) {
+            // Retrieve existing courses from local storage
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+            
+            // Remove the course at the specified index
+            courses.splice(index, 1);
+            
+ // Save the updated courses array back to local storage
+            localStorage.setItem('courses', JSON.stringify(courses));
+
+            // Refresh the course list
+            displayCourses();
+        }
+
+        // Function to edit a course
+        function editCourse(index) {
+            editIndex = index;
+            const courses = JSON.parse(localStorage.getItem('courses')) || [];
+            const course = courses[index];
+
+            document.getElementById('course-title').value = course.title;
+            document.getElementById('course-description').value = course.description;
+            document.getElementById('course-image-url').value = course.image;
+
+            document.getElementById('form-title').innerText = 'Edit Course';
+            document.getElementById('cancel-edit').style.display = 'inline-block';
+        }
+
+        // Cancel edit button event listener
+        document.getElementById('cancel-edit').addEventListener('click', function() {
+            editIndex = -1;
+            document.getElementById('form-title').innerText = 'Add New Course';
+            document.getElementById('cancel-edit').style.display = 'none';
+            document.getElementById('course-title').value = '';
+            document.getElementById('course-description').value = '';
+            document.getElementById('course-image-url').value = '';
+        });
+
+        // Display courses on page load
+        document.addEventListener('DOMContentLoaded', displayCourses);
+    </script>
+</body>
+</html>
